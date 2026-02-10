@@ -11,7 +11,7 @@
     <!-- Chart.js สำหรับกราฟ -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- SweetAlert2 สำหรับแจ้งเตือนสวยๆ -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalzert2@11"></script>
 
     <style>
         body { font-family: 'Sarabun', sans-serif; background-color: #f0f9ff; }
@@ -98,7 +98,7 @@
             <h2 class="text-2xl md:text-3xl font-bold text-blue-800 mb-2">ยินดีต้อนรับสู่โลกแห่งโค้ด!</h2>
             <p class="text-gray-500 mb-6">แบบทดสอบวิทยาการคำนวณ ม.1 (สสวท.)</p>
             
-            <form id="loginForm" onsubmit="startQuiz(event)" class="space-y-4 text-left">
+            <form id="loginForm" onsubmit="startLearning(event)" class="space-y-4 text-left">
                 <div>
                     <label class="block text-gray-700 font-bold mb-1">ประเภทการสอบ</label>
                     <select id="examType" class="w-full p-3 border rounded-lg bg-gray-50 focus:ring-2 focus:ring-blue-400 outline-none" required>
@@ -131,9 +131,243 @@
                 </div>
 
                 <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl shadow-lg transform transition active:scale-95 mt-4">
-                    เริ่มทำแบบทดสอบ 📝
+                    เข้าสู่บทเรียน & ทำแบบทดสอบ 📝
                 </button>
             </form>
+        </div>
+
+        <!-- 1.5 LEARNING/REVIEW PAGE -->
+        <div id="page-learning" class="page hidden max-w-4xl mx-auto bg-white p-6 md:p-8 rounded-2xl shadow-xl mt-4 md:mt-10 fade-in no-print">
+            <h2 class="text-2xl md:text-3xl font-bold text-indigo-700 mb-6 text-center flex items-center justify-center gap-2">
+                <span>📚</span> ทบทวนความรู้ก่อนสอบ
+            </h2>
+            
+            <div class="space-y-8 overflow-y-auto max-h-[65vh] md:max-h-none pr-2 custom-scroll">
+                <!-- Part 1: Python Review -->
+                <div class="bg-blue-50 p-6 rounded-xl border-l-8 border-blue-500 shadow-sm">
+                    <h3 class="text-xl font-bold text-blue-800 mb-4 flex items-center gap-2 border-b border-blue-200 pb-2">
+                        🐍 ส่วนที่ 1: การเขียนโปรแกรมด้วยภาษา Python
+                    </h3>
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="font-bold text-lg text-gray-800 mb-2">1. พื้นฐานภาษา Python</h4>
+                            <ul class="list-disc list-inside bg-white p-4 rounded-lg text-sm md:text-base space-y-2 shadow-sm">
+                                <li><b>print():</b> คำสั่งแสดงผลข้อมูลทางหน้าจอ <br><span class="text-gray-500 pl-6">ตัวอย่าง: <code>print("Hello", "World")</code></span></li>
+                                <li><b>input():</b> คำสั่งรับข้อมูลจากคีย์บอร์ด (ค่าที่ได้จะเป็นข้อความ String เสมอ) <br><span class="text-gray-500 pl-6">ตัวอย่าง: <code>name = input("Enter name: ")</code></span></li>
+                                <li><b>Comment:</b> ใช้เครื่องหมาย <code>#</code> เพื่อเขียนคำอธิบายโค้ด (โปรแกรมจะไม่ทำงานส่วนนี้)</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-bold text-lg text-gray-800 mb-2">2. ตัวแปรและชนิดข้อมูล (Variables & Types)</h4>
+                            <table class="w-full text-sm text-left border-collapse mb-2 bg-white rounded-lg shadow-sm overflow-hidden">
+                                <thead class="bg-blue-100 text-blue-800">
+                                    <tr><th class="p-3">ชนิดข้อมูล</th><th class="p-3">คำอธิบาย</th><th class="p-3">ตัวอย่าง</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b"><td class="p-3 font-mono text-pink-600 font-bold">int</td><td class="p-3">จำนวนเต็ม</td><td class="p-3">10, -5, 0</td></tr>
+                                    <tr class="border-b"><td class="p-3 font-mono text-pink-600 font-bold">float</td><td class="p-3">ทศนิยม</td><td class="p-3">3.14, 2.0</td></tr>
+                                    <tr class="border-b"><td class="p-3 font-mono text-pink-600 font-bold">str</td><td class="p-3">ข้อความ (String)</td><td class="p-3">"Hello", 'A'</td></tr>
+                                    <tr class="border-b"><td class="p-3 font-mono text-pink-600 font-bold">bool</td><td class="p-3">ค่าความจริง</td><td class="p-3">True, False</td></tr>
+                                </tbody>
+                            </table>
+                            <p class="text-xs text-red-500 mt-1">*กฎการตั้งชื่อตัวแปร: ห้ามขึ้นต้นด้วยตัวเลข, ห้ามเว้นวรรค, ห้ามใช้คำสงวน (เช่น if, for, class)</p>
+                        </div>
+
+                        <div>
+                            <h4 class="font-bold text-lg text-gray-800 mb-2">3. ตัวดำเนินการ (Operators)</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="bg-white p-4 rounded-lg shadow-sm">
+                                    <h5 class="font-bold text-sm mb-2 text-blue-600">ทางคณิตศาสตร์</h5>
+                                    <ul class="text-sm space-y-1">
+                                        <li><code>+</code> บวก, <code>-</code> ลบ, <code>*</code> คูณ</li>
+                                        <li><code>/</code> หาร (ผลเป็น float เสมอ เช่น 4/2 = 2.0)</li>
+                                        <li><code>//</code> หารปัดเศษทิ้ง (Floor Div) เช่น <code>7 // 2 = 3</code></li>
+                                        <li><code>%</code> หารเอาเศษ (Modulo) เช่น <code>7 % 2 = 1</code></li>
+                                    </ul>
+                                </div>
+                                <div class="bg-white p-4 rounded-lg shadow-sm">
+                                    <h5 class="font-bold text-sm mb-2 text-blue-600">เปรียบเทียบ & ตรรกะ</h5>
+                                    <ul class="text-sm space-y-1">
+                                        <li><code>==</code> เท่ากับ, <code>!=</code> ไม่เท่ากับ</li>
+                                        <li><code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code></li>
+                                        <li><code>and</code> จริงเมื่อจริงทั้งคู่</li>
+                                        <li><code>or</code> จริงเมื่อมีอันใดอันหนึ่งจริง</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="font-bold text-lg text-gray-800 mb-2">4. การควบคุมทิศทาง (Control Flow)</h4>
+                            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-3 mb-3 rounded-r-lg">
+                                <p class="font-bold text-sm text-yellow-800">⚠️ สำคัญ: Python ใช้การ <u>ย่อหน้า (Indentation)</u> เพื่อระบุบล็อกคำสั่ง</p>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="bg-gray-800 text-white p-4 rounded-lg text-sm font-mono shadow-sm">
+                                    <p class="text-gray-400 mb-1"># 1. การตัดสินใจ (if-else)</p>
+                                    <p>score = 75</p>
+                                    <p><span class="text-purple-400">if</span> score >= 80:</p>
+                                    <p class="pl-4">print("A")</p>
+                                    <p><span class="text-purple-400">elif</span> score >= 70:</p>
+                                    <p class="pl-4">print("B")</p>
+                                    <p><span class="text-purple-400">else</span>:</p>
+                                    <p class="pl-4">print("C")</p>
+                                </div>
+                                <div class="bg-gray-800 text-white p-4 rounded-lg text-sm font-mono shadow-sm">
+                                    <p class="text-gray-400 mb-1"># 2. การวนซ้ำ (Loop)</p>
+                                    <p class="text-gray-500 mb-1"># for: รู้จำนวนรอบแน่นอน</p>
+                                    <p><span class="text-purple-400">for</span> i <span class="text-purple-400">in</span> range(1, 6): <span class="text-gray-500"># 1 ถึง 5</span></p>
+                                    <p class="pl-4">print(i)</p>
+                                    <br>
+                                    <p class="text-gray-500 mb-1"># while: วนเมื่อเงื่อนไขจริง</p>
+                                    <p><span class="text-purple-400">while</span> count < 5:</p>
+                                    <p class="pl-4">print(count)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="font-bold text-lg text-gray-800 mb-2">5. เต่าเจ้าปัญญา (Turtle Graphics)</h4>
+                            <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                                <p class="text-sm text-gray-600 mb-3">ต้องพิมพ์ <code>import turtle</code> ก่อนใช้งานเสมอ</p>
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                                    <div class="bg-green-50 p-2 rounded border border-green-200 text-center"><code>forward(d)</code><br>เดินหน้า</div>
+                                    <div class="bg-green-50 p-2 rounded border border-green-200 text-center"><code>backward(d)</code><br>ถอยหลัง</div>
+                                    <div class="bg-green-50 p-2 rounded border border-green-200 text-center"><code>left(a)</code><br>หันซ้าย</div>
+                                    <div class="bg-green-50 p-2 rounded border border-green-200 text-center"><code>right(a)</code><br>หันขวา</div>
+                                    <div class="bg-green-50 p-2 rounded border border-green-200 text-center"><code>penup()</code><br>ยกปากกา</div>
+                                    <div class="bg-green-50 p-2 rounded border border-green-200 text-center"><code>pendown()</code><br>จรดปากกา</div>
+                                    <div class="bg-green-50 p-2 rounded border border-green-200 text-center"><code>circle(r)</code><br>วาดวงกลม</div>
+                                    <div class="bg-green-50 p-2 rounded border border-green-200 text-center"><code>pencolor()</code><br>เปลี่ยนสี</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Part 2: Data Review -->
+                <div class="bg-green-50 p-6 rounded-xl border-l-8 border-green-500 shadow-sm">
+                    <h3 class="text-xl font-bold text-green-800 mb-4 flex items-center gap-2 border-b border-green-200 pb-2">
+                        📊 ส่วนที่ 2: ข้อมูลและการประมวลผล
+                    </h3>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="font-bold text-lg text-gray-800 mb-2">1. ข้อมูล vs สารสนเทศ</h4>
+                            <div class="flex flex-col md:flex-row gap-4">
+                                <div class="flex-1 bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+                                    <strong class="text-indigo-600 text-lg block mb-1">📁 ข้อมูล (Data)</strong>
+                                    <p class="text-sm text-gray-600">ข้อเท็จจริงดิบที่ยังไม่ผ่านการประมวลผล เช่น คะแนนสอบดิบ, ราคาสินค้า, ส่วนสูง</p>
+                                </div>
+                                <div class="hidden md:flex items-center justify-center text-2xl text-gray-400">➡</div>
+                                <div class="flex-1 bg-white p-4 rounded-lg shadow-sm border border-indigo-200 ring-2 ring-indigo-50">
+                                    <strong class="text-indigo-600 text-lg block mb-1">📈 สารสนเทศ (Information)</strong>
+                                    <p class="text-sm text-gray-600">ข้อมูลที่ผ่านการประมวลผล คัดกรอง หรือสรุปแล้ว เช่น เกรดเฉลี่ย, กราฟยอดขาย, รายงานสรุป</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="font-bold text-lg text-gray-800 mb-2">2. ประเภทของข้อมูล</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="bg-white p-4 rounded-lg shadow-sm">
+                                    <h5 class="font-bold text-blue-600 border-b border-blue-200 mb-2 pb-1">แบ่งตามแหล่งที่มา</h5>
+                                    <ul class="text-sm space-y-3">
+                                        <li>
+                                            <span class="font-bold text-gray-800">1. ปฐมภูมิ (Primary Data)</span><br>
+                                            เก็บเองโดยตรง (สัมภาษณ์, สังเกต, ทดลอง)<br>
+                                            <span class="text-xs text-green-600 bg-green-50 px-2 py-0.5 rounded">ข้อดี: ตรงความต้องการ, ทันสมัย</span>
+                                        </li>
+                                        <li>
+                                            <span class="font-bold text-gray-800">2. ทุติยภูมิ (Secondary Data)</span><br>
+                                            นำข้อมูลที่คนอื่นเก็บไว้แล้วมาใช้ (สถิติจากเว็บ, บทความ)<br>
+                                            <span class="text-xs text-green-600 bg-green-50 px-2 py-0.5 rounded">ข้อดี: ประหยัดเวลา, ค่าใช้จ่ายน้อย</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="bg-white p-4 rounded-lg shadow-sm">
+                                    <h5 class="font-bold text-purple-600 border-b border-purple-200 mb-2 pb-1">แบ่งตามลักษณะข้อมูล</h5>
+                                    <ul class="text-sm space-y-3">
+                                        <li>
+                                            <span class="font-bold text-gray-800">1. เชิงปริมาณ (Quantitative)</span><br>
+                                            เป็นตัวเลข นำมาคำนวณได้ (อายุ, รายได้, คะแนน)
+                                        </li>
+                                        <li>
+                                            <span class="font-bold text-gray-800">2. เชิงคุณภาพ (Qualitative)</span><br>
+                                            บรรยายลักษณะ ความรู้สึก (เพศ, ความพึงพอใจ, สีผิว, ความคิดเห็น)
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="font-bold text-lg text-gray-800 mb-2">3. วงจรการประมวลผลข้อมูล (IPOS Cycle)</h4>
+                            <div class="flex flex-wrap justify-center gap-2 md:gap-4 text-center text-sm font-bold bg-white p-4 rounded-lg shadow-sm">
+                                <div class="bg-orange-50 p-3 rounded-lg border border-orange-200 w-28 md:w-32">
+                                    1. รับข้อมูล<br>(Input)
+                                    <div class="text-xs font-normal mt-1 text-gray-500">เก็บรวบรวม, กรอกข้อมูล</div>
+                                </div>
+                                <div class="self-center text-gray-400">➡</div>
+                                <div class="bg-blue-50 p-3 rounded-lg border border-blue-200 w-28 md:w-32">
+                                    2. ประมวลผล<br>(Process)
+                                    <div class="text-xs font-normal mt-1 text-gray-500">คำนวณ, จัดเรียง, วิเคราะห์</div>
+                                </div>
+                                <div class="self-center text-gray-400">➡</div>
+                                <div class="bg-green-50 p-3 rounded-lg border border-green-200 w-28 md:w-32">
+                                    3. แสดงผล<br>(Output)
+                                    <div class="text-xs font-normal mt-1 text-gray-500">รายงาน, กราฟ, สารสนเทศ</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="font-bold text-lg text-gray-800 mb-2">4. คุณภาพข้อมูลและเครื่องมือ</h4>
+                            <div class="bg-white p-4 rounded-lg shadow-sm">
+                                <ul class="list-disc list-inside text-sm space-y-2 text-gray-700">
+                                    <li><b>ลักษณะข้อมูลที่ดี:</b> 1.ถูกต้องแม่นยำ 2.ทันสมัย(เป็นปัจจุบัน) 3.สมบูรณ์ครบถ้วน 4.สอดคล้องกับความต้องการ 5.ตรวจสอบได้</li>
+                                    <li><b>เครื่องมือจัดการข้อมูล:</b>
+                                        <ul class="list-inside ml-6 mt-1 text-gray-600 bg-gray-50 p-2 rounded">
+                                            <li class="mb-1"><b>Google Sheets / Excel:</b> เหมาะสำหรับจัดเรียงข้อมูล คำนวณสูตร และสร้างกราฟ</li>
+                                            <li class="mb-1"><b>Google Forms:</b> เหมาะสำหรับสร้างแบบสอบถามออนไลน์เพื่อเก็บข้อมูลจำนวนมาก</li>
+                                            <li><b>Google Colab:</b> เขียนโปรแกรม Python บน Cloud เพื่อวิเคราะห์ข้อมูล</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="font-bold text-lg text-gray-800 mb-2">5. การเลือกใช้กราฟ (Data Visualization)</h4>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center text-sm">
+                                <div class="bg-white border p-3 rounded-lg hover:shadow-md transition">
+                                    <div class="text-3xl mb-1">📊</div>
+                                    <div class="font-bold text-blue-700">กราฟแท่ง (Bar)</div>
+                                    <div class="text-xs text-gray-500 mt-1">เปรียบเทียบปริมาณ<br>ระหว่างกลุ่ม</div>
+                                </div>
+                                <div class="bg-white border p-3 rounded-lg hover:shadow-md transition">
+                                    <div class="text-3xl mb-1">🥧</div>
+                                    <div class="font-bold text-purple-700">กราฟวงกลม (Pie)</div>
+                                    <div class="text-xs text-gray-500 mt-1">ดูสัดส่วน (ร้อยละ)<br>ของข้อมูลทั้งหมด</div>
+                                </div>
+                                <div class="bg-white border p-3 rounded-lg hover:shadow-md transition">
+                                    <div class="text-3xl mb-1">📈</div>
+                                    <div class="font-bold text-green-700">กราฟเส้น (Line)</div>
+                                    <div class="text-xs text-gray-500 mt-1">ดูแนวโน้มตามเวลา<br>(Time Series)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 text-center bg-gray-100 p-6 rounded-xl border border-gray-200">
+                <p class="mb-4 text-gray-600 text-lg">เมื่ออ่านทบทวนเข้าใจแล้ว กดปุ่มด้านล่างเพื่อเริ่มจับเวลาสอบ</p>
+                <button onclick="startQuizLogic()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-12 rounded-full shadow-lg transform transition hover:scale-105 text-lg md:text-xl w-full md:w-auto flex items-center justify-center gap-2 mx-auto">
+                    <span>⏱️</span> เริ่มทำแบบทดสอบ
+                </button>
+            </div>
         </div>
 
         <!-- 2. QUIZ PAGE (Adaptive UI) -->
@@ -176,7 +410,7 @@
             </div>
         </div>
 
-        <!-- 3. RESULT PAGE (No Answer Key, Advice Only) -->
+        <!-- 3. RESULT PAGE (Updated with Wrong Answers Report) -->
         <div id="page-result" class="page hidden max-w-2xl mx-auto text-center fade-in no-print">
             <div class="bg-white p-8 rounded-3xl shadow-2xl mb-8 relative overflow-hidden">
                 <div class="absolute top-0 left-0 w-full h-4 bg-gradient-to-r from-green-400 to-blue-500"></div>
@@ -189,6 +423,7 @@
                         <span id="final-score">0</span> <span class="text-2xl text-gray-400">/ 20</span>
                     </div>
                     <p id="score-message" class="text-lg text-gray-600 font-medium">ยอดเยี่ยมมาก!</p>
+                    <div id="wrong-answers-summary" class="hidden mt-4 p-3 bg-red-50 text-red-600 rounded-lg text-sm border border-red-100"></div>
                 </div>
 
                 <!-- Recommendations Section -->
@@ -205,13 +440,14 @@
                 <div id="sending-status" class="hidden p-4 rounded-lg border mt-4 text-sm"></div>
             </div>
 
-            <!-- Action Buttons -->
+            <!-- Pre-test Action -->
             <div id="pretest-actions" class="hidden text-center space-y-4">
                 <p class="text-gray-500">บันทึกคะแนนเรียบร้อยแล้ว</p>
-                <button onclick="location.reload()" class="bg-gray-500 text-white px-8 py-3 rounded-full hover:bg-gray-600 transition w-full md:w-auto">กลับหน้าแรก</button>
+                <!-- Remove Reload Button -->
+                <div class="text-gray-400 text-sm">สิ้นสุดการสอบ (ไม่สามารถทำซ้ำได้)</div>
             </div>
 
-            <!-- Survey Section (Initially Hidden) -->
+            <!-- Survey Section -->
             <div id="survey-section" class="bg-white p-6 md:p-8 rounded-2xl shadow-xl text-left hidden border-t-4 border-purple-500 mt-6">
                 <div class="text-center mb-6">
                     <h2 class="text-xl md:text-2xl font-bold text-purple-700">📝 แบบสำรวจความรู้สึกหลังเรียน</h2>
@@ -220,9 +456,22 @@
                 <form id="surveyForm" onsubmit="submitSurvey(event)">
                     <div id="survey-questions" class="space-y-8"></div>
                     <button type="submit" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-4 rounded-xl mt-8 shadow-lg text-lg">
-                        บันทึกผลการเรียน 💾
+                        บันทึกผลการเรียน & ดูเฉลย 💾
                     </button>
                 </form>
+            </div>
+
+            <!-- Answer Key Section (New) -->
+            <div id="answer-key-section" class="hidden mt-8 text-left bg-white p-8 rounded-2xl shadow-xl border-t-4 border-green-500">
+                <h3 class="text-2xl font-bold mb-6 text-indigo-800 flex items-center gap-2">
+                    📖 เฉลยละเอียดและคำอธิบาย
+                </h3>
+                <div id="answer-list" class="space-y-6"></div>
+                
+                <div class="text-center mt-8 pt-6 border-t">
+                    <p class="text-gray-500 font-bold text-lg">สิ้นสุดการทำแบบทดสอบ</p>
+                    <p class="text-gray-400 text-sm mt-1">ขอบคุณที่ตั้งใจเรียนรู้ครับ ❤️</p>
+                </div>
             </div>
         </div>
 
@@ -409,36 +658,88 @@
         // STATE
         let studentData = {};
         let currentQuestionIndex = 0;
-        let userAnswers = new Array(20).fill(null); // Store answers index 0-19
+        let userAnswers = new Array(20).fill(null);
         let timerInterval;
         let seconds = 0;
         let allSheetData = [];
         let satisfactionCharts = [];
+        let tempPassword = ""; // Store password for teacher dashboard
 
         // QUESTIONS
         const questions = [
-            // PART 1: PYTHON (0-9)
-            { q: "ข้อใดคือคำสั่งที่ใช้แสดงผลข้อความออกทางหน้าจอในภาษา Python?", options: ["input()", "print()", "show()", "output()"], ans: 1 },
-            { q: "สัญลักษณ์ใดใช้สำหรับการรับข้อมูล (Input) และเก็บไว้ในตัวแปร?", options: ["=", "==", "->", ":"], ans: 0 },
-            { q: "ข้อใดคือการตั้งชื่อตัวแปรที่ผิดกฎของ Python?", options: ["score_1", "myVar", "1number", "_data"], ans: 2 },
-            { q: "หากต้องการเก็บข้อมูลอายุ (Age) ควรใช้ชนิดข้อมูลใด?", options: ["String", "Integer", "Float", "List"], ans: 1 },
-            { q: "ผลลัพธ์ของ 10 // 3 คือข้อใด?", options: ["3.33", "3", "4", "30"], ans: 1 },
-            { q: "คำสั่งใดใช้ตรวจสอบเงื่อนไข 'ถ้า...แล้ว'?", options: ["loop", "for", "if", "check"], ans: 2 },
-            { q: "การเขียนบล็อกคำสั่งใน Python ใช้สัญลักษณ์ใด?", options: ["ปีกกา", "วงเล็บ", "การย่อหน้า (Indentation)", ";"], ans: 2 },
-            { q: "หากต้องการทำซ้ำตามจำนวนรอบที่แน่นอน ควรใช้?", options: ["if-else", "for loop", "while loop", "print"], ans: 1 },
-            { q: "คำสั่ง turtle.forward(100) คืออะไร?", options: ["เดินหน้า 100", "หมุนขวา 100", "วาดวงกลม", "เปลี่ยนสี"], ans: 0 },
-            { q: "ข้อใดคือ Syntax Error?", options: ["คำนวณผิด", "ลืมเครื่องหมาย :", "โปรแกรมค้าง", "ผลลัพธ์ผิด"], ans: 1 },
-            // PART 2: DATA (10-19)
-            { q: "ข้อใดกล่าวถึงความสัมพันธ์ระหว่าง 'ข้อมูล' และ 'สารสนเทศ' ได้ถูกต้อง?", options: ["ข้อมูลคือผลลัพธ์จากสารสนเทศ", "สารสนเทศคือข้อมูลที่ผ่านการประมวลผลแล้ว", "ข้อมูลและสารสนเทศคือสิ่งเดียวกัน", "สารสนเทศต้องเกิดขึ้นก่อนข้อมูล"], ans: 1 },
-            { q: "ข้อใด **ไม่ใช่** คุณลักษณะของข้อมูลที่ดี?", options: ["มีความถูกต้องแม่นยำ", "มีความทันสมัย", "มีความซับซ้อนเข้าใจยาก", "ตรงตามความต้องการใช้งาน"], ans: 2 },
-            { q: "การสัมภาษณ์ปราชญ์ชาวบ้านเพื่อเก็บข้อมูลทำโครงงาน ถือเป็นข้อมูลประเภทใด?", options: ["ข้อมูลปฐมภูมิ", "ข้อมูลทุติยภูมิ", "ข้อมูลเชิงปริมาณ", "ข้อมูลอิเล็กทรอนิกส์"], ans: 0 },
-            { q: "ลำดับการทำงานของการประมวลผลข้อมูล (Data Processing Cycle) คือข้อใด?", options: ["แสดงผล -> ประมวลผล -> รับข้อมูล", "รับข้อมูล -> แสดงผล -> ประมวลผล", "รับข้อมูล -> ประมวลผล -> แสดงผล", "ประมวลผล -> รับข้อมูล -> แสดงผล"], ans: 2 },
-            { q: "โปรแกรมใดเหมาะสมที่สุดสำหรับการ 'จัดเรียงลำดับคะแนนสอบ'?", options: ["Microsoft Word", "Google Sheets / Excel", "Adobe Photoshop", "Paint"], ans: 1 },
-            { q: "หากต้องการเก็บข้อมูลความพึงพอใจจำนวนมากที่รวดเร็วที่สุด ควรใช้วิธีใด?", options: ["การสัมภาษณ์ทีละคน", "การสังเกตพฤติกรรม", "การทำแบบสอบถามออนไลน์ (Google Forms)", "การประชุมกลุ่ม"], ans: 2 },
-            { q: "อุปกรณ์ใดทำหน้าที่ 'รับข้อมูล' (Input) ในระบบคอมพิวเตอร์?", options: ["จอภาพ", "เครื่องพิมพ์", "คีย์บอร์ด", "ลำโพง"], ans: 2 },
-            { q: "ถ้าต้องการเปรียบเทียบ 'ปริมาณฝนที่ตกในแต่ละเดือน' ควรนำเสนอข้อมูลรูปแบบใด?", options: ["ข้อความบรรยาย", "กราฟแท่ง (Bar Chart)", "ภาพวาดระบายสี", "ตาราง"], ans: 1 },
-            { q: "ข้อใดเป็น 'ข้อมูลเชิงคุณภาพ'?", options: ["น้ำหนัก 45 กก.", "ส่วนสูง 160 ซม.", "ความรู้สึกชอบ/ไม่ชอบ", "เงินเดือน 15,000 บาท"], ans: 2 },
-            { q: "การนำข้อมูลมาวิเคราะห์เพื่อตัดสินใจ (Data Analytics) มีประโยชน์อย่างไร?", options: ["ตัดสินใจได้แม่นยำมีหลักการ", "เสียเวลาทำงาน", "ข้อมูลซับซ้อนขึ้น", "ไม่เกิดประโยชน์"], ans: 0 }
+            // PART 1: PYTHON
+            { 
+                q: "จงหาผลลัพธ์ของโปรแกรมต่อไปนี้<br><pre class='bg-gray-100 p-2 rounded mt-2'>x = 0\nfor i in range(1, 5):\n    x = x + i\nprint(x)</pre>", 
+                options: ["10", "15", "5", "4"], 
+                ans: 0, 
+                desc: "ลูปทำงานที่ i = 1, 2, 3, 4 (ไม่รวม 5) ผลรวมคือ 1+2+3+4 = 10" 
+            },
+            { 
+                q: "จงหาผลลัพธ์ของโปรแกรมต่อไปนี้<br><pre class='bg-gray-100 p-2 rounded mt-2'>i = 1\nwhile i < 10:\n    i = i + 2\nprint(i)</pre>", 
+                options: ["9", "10", "11", "12"], 
+                ans: 2, 
+                desc: "i เริ่มที่ 1 เพิ่มทีละ 2: 1 -> 3 -> 5 -> 7 -> 9 -> 11 (เมื่อ 11 เงื่อนไข <10 เป็นเท็จ จึงจบ)" 
+            },
+            { 
+                q: "คำสั่งใดจะทำให้เกิด Infinite Loop (ลูปทำงานไม่รู้จบ)?", 
+                options: ["while True:", "for i in range(10):", "if True:", "while False:"], 
+                ans: 0, 
+                desc: "while True: เป็นการกำหนดเงื่อนไขให้เป็นจริงตลอดกาล โปรแกรมจึงวนซ้ำไม่หยุด" 
+            },
+            { 
+                q: "จงหาผลลัพธ์ของโปรแกรมต่อไปนี้?<br><pre class='bg-gray-100 p-2 rounded mt-2'>x = 5\nx = x + 2\nprint(x)</pre>", 
+                options: ["5", "2", "7", "52"], 
+                ans: 2, 
+                desc: "x เริ่มต้นที่ 5, บรรทัดต่อมา x = 5 + 2 ซึ่งได้ 7" 
+            },
+            { 
+                q: "จากโค้ดด้านล่าง ข้อความ \"Hello\" จะถูกพิมพ์กี่ครั้ง?<br><pre class='bg-gray-100 p-2 rounded mt-2'>for i in range(2):\n    for j in range(3):\n        print(\"Hello\")</pre>", 
+                options: ["2 ครั้ง", "3 ครั้ง", "5 ครั้ง", "6 ครั้ง"], 
+                ans: 3, 
+                desc: "ลูปนอก 2 รอบ x ลูปใน 3 รอบ = 6 ครั้ง" 
+            },
+            { 
+                q: "ผลลัพธ์ของโปรแกรมคืออะไร?<br><pre class='bg-gray-100 p-2 rounded mt-2'>score = 75\nif score > 80:\n    print(\"A\")\nelif score > 70:\n    print(\"B\")\n    if score >= 75:\n        print(\"+\")\nelse:\n    print(\"C\")</pre>", 
+                options: ["B", "B ตามด้วย +", "A", "C"], 
+                ans: 1, 
+                desc: "score=75 เข้าเงื่อนไข >70 พิมพ์ B, และเข้าเงื่อนไข >=75 พิมพ์ +" 
+            },
+            { 
+                q: "คำสั่ง continue ในวงวน (Loop) มีหน้าที่อะไร?", 
+                options: ["หยุดการทำงานของลูปทันที", "ข้ามการทำงานรอบปัจจุบัน แล้วไปเริ่มรอบถัดไป", "เริ่มต้นลูปใหม่ตั้งแต่รอบแรก", "จบการทำงานของโปรแกรม"], 
+                ans: 1, 
+                desc: "continue ใช้ข้ามคำสั่งที่เหลือในรอบนั้นๆ แล้วกลับไปเริ่มรอบใหม่ทันที" 
+            },
+            { 
+                q: "จงหาผลลัพธ์ของตัวแปร total<br><pre class='bg-gray-100 p-2 rounded mt-2'>total = 0\nfor k in range(10, 15, 2):\n    total = total + 1\nprint(total)</pre>", 
+                options: ["2", "3", "5", "15"], 
+                ans: 1, 
+                desc: "range(10, 15, 2) จะได้ค่า 10, 12, 14 (3 ตัว) ลูปจึงทำงาน 3 รอบ total=3" 
+            },
+            { 
+                q: "ข้อใดคือผลลัพธ์ของ print(len(\"Good Morning\"))?", 
+                options: ["10", "11", "12", "Error"], 
+                ans: 2, 
+                desc: "นับจำนวนตัวอักษรรวมช่องว่าง: G-o-o-d- -M-o-r-n-i-n-g = 12 ตัว" 
+            },
+            { 
+                q: "ฟังก์ชันในข้อใด ใช้สำหรับ แปลงตัวเลขให้กลายเป็นข้อความ?", 
+                options: ["int()", "str()", "change()", "text()"], 
+                ans: 1, 
+                desc: "str() หรือ String ใช้แปลงค่าอื่นๆ ให้เป็นข้อความ" 
+            },
+            
+            // PART 2: DATA & PROCESSING
+            { q: "ข้อใดคือความหมายที่ถูกต้องที่สุดของคำว่า \"ข้อมูล\" (Data)?", options: ["ข้อเท็จจริงหรือเรื่องราวที่ยังไม่ผ่านการประมวลผล", "ผลลัพธ์ที่ได้จากการคำนวณทางสถิติ", "สารสนเทศที่ผ่านการกลั่นกรองแล้ว", "ความรู้ที่นำไปใช้ประโยชน์ได้ทันที"], ans: 0, desc: "ข้อมูล (Data) คือข้อเท็จจริงดิบที่ยังไม่ผ่านการประมวลผล" },
+            { q: "\"ด.ญ.มานี เดินสำรวจราคาสินค้าในตลาดด้วยตนเอง\" จัดเป็นการรวบรวมข้อมูลประเภทใด?", options: ["ข้อมูลทุติยภูมิ", "ข้อมูลปฐมภูมิ", "ข้อมูลเชิงปริมาณ", "ข้อมูลสารสนเทศ"], ans: 1, desc: "การเก็บรวบรวมด้วยตนเองจากแหล่งกำเนิดโดยตรง คือ ข้อมูลปฐมภูมิ (Primary Data)" },
+            { q: "ข้อใดจัดเป็น \"ข้อมูลเชิงคุณภาพ\"?", options: ["คะแนนสอบวิชาคณิตศาสตร์", "จำนวนนักเรียนในห้องเรียน", "ความพึงพอใจต่อการบริการ", "ส่วนสูงและน้ำหนัก"], ans: 2, desc: "ความพึงพอใจเป็นข้อมูลเชิงคุณภาพ ไม่สามารถวัดเป็นตัวเลขเพื่อคำนวณได้โดยตรง" },
+            { q: "ขั้นตอนสุดท้ายของการประมวลผลข้อมูลคือข้อใด?", options: ["การนำเข้าข้อมูล (Input)", "การประมวลผล (Process)", "การจัดเก็บข้อมูล (Storage)", "สารสนเทศ (Output/Information)"], ans: 3, desc: "ลำดับคือ Input -> Process -> Output (Information)" },
+            { q: "ข้อใด ไม่ใช่ ลักษณะของข้อมูลที่ดี?", options: ["มีความซ้ำซ้อนสูง", "มีความถูกต้องแม่นยำ", "มีความทันสมัย", "มีความสอดคล้องกับความต้องการ"], ans: 0, desc: "ข้อมูลที่ดีต้องไม่ซ้ำซ้อน กระชับ และตรวจสอบได้" },
+            { q: "หากต้องการข้อมูลสถิติประชากรย้อนหลัง 10 ปี วิธีการรวบรวมข้อมูลใดเหมาะสมและประหยัดเวลาที่สุด?", options: ["เดินสำรวจทุกบ้าน", "ค้นหาจากเว็บไซต์สำนักงานสถิติแห่งชาติ", "ออกแบบสอบถามทางไปรษณีย์", "สัมภาษณ์ผู้นำชุมชน"], ans: 1, desc: "การค้นหาจากแหล่งที่มีผู้รวบรวมไว้แล้ว (ทุติยภูมิ) ประหยัดเวลาที่สุด" },
+            { q: "อุปกรณ์ในข้อใดทำหน้าที่หลักในการ \"ประมวลผล\" (Process) ข้อมูล?", options: ["คีย์บอร์ด", "ฮาร์ดดิสก์", "ซีพียู (CPU)", "จอภาพ"], ans: 2, desc: "CPU (Central Processing Unit) คือหน่วยประมวลผลกลาง" },
+            { q: "โปรแกรมใดเหมาะสำหรับการ \"คำนวณและสร้างกราฟ\" มากที่สุด?", options: ["Word", "PowerPoint", "Photoshop", "Excel / Google Sheets"], ans: 3, desc: "Spreadsheet เหมาะที่สุดสำหรับการจัดการตัวเลข คำนวณ และสร้างกราฟ" },
+            { q: "การกระทำใดถือเป็นการ \"นำเข้าข้อมูล\" (Input)?", options: ["การสแกนบาร์โค้ดราคาสินค้า", "การพิมพ์รายงาน", "การบันทึกไฟล์", "การแสดงผลรูปภาพ"], ans: 0, desc: "การสแกนบาร์โค้ดเป็นการนำข้อมูลรหัสสินค้าเข้าสู่ระบบ" },
+            { q: "ขั้นตอนแรกสุดของการจัดการข้อมูลคือข้อใด?", options: ["การรวบรวมข้อมูล", "การกำหนดวัตถุประสงค์", "การประมวลผลข้อมูล", "การนำเสนอข้อมูล"], ans: 1, desc: "ต้องกำหนดวัตถุประสงค์ก่อนว่าจะเก็บข้อมูลอะไร เพื่ออะไร" }
         ];
 
         const surveyStructure = [
@@ -454,10 +755,10 @@
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
             document.getElementById(`page-${pageId}`).classList.remove('hidden');
-            if (pageId === 'teacher') fetchScoreboard();
+            if (pageId === 'teacher') fetchScoreboard(tempPassword);
         }
 
-        function startQuiz(e) {
+        function startLearning(e) {
             e.preventDefault();
             studentData = {
                 type: document.getElementById('examType').value,
@@ -467,6 +768,11 @@
             };
             document.getElementById('display-name').innerText = studentData.name;
             
+            // Go to Learning Page
+            showPage('learning');
+        }
+
+        function startQuizLogic() {
             // Reset Quiz
             currentQuestionIndex = 0;
             userAnswers = new Array(questions.length).fill(null);
@@ -483,11 +789,9 @@
             const card = document.getElementById('question-card');
             const total = questions.length;
             
-            // Update Displays
             document.getElementById('current-q-display').innerText = currentQuestionIndex + 1;
             document.getElementById('progress-bar').style.width = `${((currentQuestionIndex + 1) / total) * 100}%`;
 
-            // Render HTML
             let sectionTitle = "";
             if(currentQuestionIndex === 0) sectionTitle = `<span class="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-bold mb-4">🐍 ส่วนที่ 1: การเขียนโปรแกรม Python</span>`;
             if(currentQuestionIndex === 10) sectionTitle = `<span class="inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-bold mb-4">📊 ส่วนที่ 2: ข้อมูลและการประมวลผล</span>`;
@@ -508,7 +812,6 @@
                 </div>
             `;
 
-            // Button States
             const btnPrev = document.getElementById('btn-prev');
             const btnNext = document.getElementById('btn-next');
             const btnSubmit = document.getElementById('btn-submit');
@@ -526,14 +829,11 @@
 
         function selectAnswer(optionIndex) {
             userAnswers[currentQuestionIndex] = optionIndex;
-            renderCurrentQuestion(); // Re-render to show selection styling
+            renderCurrentQuestion();
         }
 
         function nextQuestion() {
-            if (userAnswers[currentQuestionIndex] === null) {
-                Swal.fire({ toast: true, position: 'center', icon: 'warning', title: 'กรุณาเลือกคำตอบก่อนไปข้อถัดไป', showConfirmButton: false, timer: 1500 });
-                return;
-            }
+            if (userAnswers[currentQuestionIndex] === null) return Swal.fire('แจ้งเตือน', 'กรุณาเลือกคำตอบก่อนไปข้อถัดไป', 'warning');
             if (currentQuestionIndex < questions.length - 1) {
                 currentQuestionIndex++;
                 renderCurrentQuestion();
@@ -548,41 +848,42 @@
         }
 
         function submitQuiz() {
-            if (userAnswers[currentQuestionIndex] === null) {
-                Swal.fire({ toast: true, position: 'center', icon: 'warning', title: 'กรุณาเลือกคำตอบก่อนส่ง', showConfirmButton: false, timer: 1500 });
-                return;
-            }
+            if (userAnswers[currentQuestionIndex] === null) return Swal.fire('แจ้งเตือน', 'กรุณาเลือกคำตอบก่อนส่ง', 'warning');
 
-            // Calculate Score
             let correct = 0;
-            let part1Score = 0; // Python (0-9)
-            let part2Score = 0; // Data (10-19)
+            let part1Score = 0;
+            let part2Score = 0;
+            const wrongList = [];
 
             userAnswers.forEach((ans, idx) => {
                 if (ans === questions[idx].ans) {
                     correct++;
                     if(idx < 10) part1Score++; else part2Score++;
+                } else {
+                    wrongList.push(idx + 1);
                 }
             });
 
             clearInterval(timerInterval);
             document.getElementById('final-score').innerText = correct;
             
-            // Generate Message based on score
-            let msg = "";
-            if (correct >= 16) msg = "สุดยอดไปเลย! อัจฉริยะ!";
-            else if (correct >= 10) msg = "เก่งมาก! ผ่านเกณฑ์สบายๆ";
-            else msg = "พยายามอีกนิดนะ! สู้ๆ";
+            let msg = correct >= 16 ? "สุดยอดไปเลย! อัจฉริยะ!" : correct >= 10 ? "เก่งมาก! ผ่านเกณฑ์สบายๆ" : "พยายามอีกนิดนะ! สู้ๆ";
             document.getElementById('score-message').innerText = msg;
 
-            // Generate Recommendations (No Answer Key)
-            generateRecommendations(part1Score, part2Score);
+            const wrongSummary = document.getElementById('wrong-answers-summary');
+            if (wrongList.length > 0) {
+                wrongSummary.innerHTML = `❌ ข้อที่ตอบผิด: <span class="font-bold">${wrongList.join(', ')}</span>`;
+                wrongSummary.classList.remove('hidden');
+            } else {
+                wrongSummary.innerHTML = `✅ ยอดเยี่ยม! คุณทำถูกทุกข้อ`;
+                wrongSummary.classList.remove('hidden');
+            }
 
+            generateRecommendations(part1Score, part2Score);
             showPage('result');
 
-            // Handle Post-test/Pre-test logic
             if (studentData.type === 'Pre-test') {
-                sendDataToScript(null, null, null, correct); // Send score immediately
+                sendDataToScript(null, null, null, correct);
                 document.getElementById('pretest-actions').classList.remove('hidden');
             } else {
                 renderSurvey();
@@ -594,32 +895,12 @@
         function generateRecommendations(p1, p2) {
             const container = document.getElementById('recommendation-content');
             let html = "";
-
-            // Python Logic
-            if (p1 < 5) {
-                html += `<div class="p-3 bg-red-50 text-red-800 rounded-lg border border-red-200 mb-2">
-                            <strong class="block mb-1">❌ ส่วน Python (ได้ ${p1}/10)</strong>
-                            ควรทบทวนเรื่อง: คำสั่งพื้นฐาน (print, input), โครงสร้างภาษา และการใช้ Loop
-                         </div>`;
-            } else {
-                html += `<div class="p-3 bg-green-50 text-green-800 rounded-lg border border-green-200 mb-2">
-                            <strong class="block mb-1">✅ ส่วน Python (ได้ ${p1}/10)</strong>
-                            ทำได้ดีแล้ว! ฝึกเขียนโปรแกรมบ่อยๆ จะเก่งขึ้นอีกแน่นอน
-                         </div>`;
-            }
-
-            // Data Logic
-            if (p2 < 5) {
-                html += `<div class="p-3 bg-red-50 text-red-800 rounded-lg border border-red-200">
-                            <strong class="block mb-1">❌ ส่วนข้อมูล (ได้ ${p2}/10)</strong>
-                            ควรทบทวนเรื่อง: ประเภทข้อมูล, ขั้นตอนการประมวลผล และการเลือกใช้กราฟ
-                         </div>`;
-            } else {
-                html += `<div class="p-3 bg-green-50 text-green-800 rounded-lg border border-green-200">
-                            <strong class="block mb-1">✅ ส่วนข้อมูล (ได้ ${p2}/10)</strong>
-                            เยี่ยมมาก! มีความเข้าใจเรื่องข้อมูลเป็นอย่างดี
-                         </div>`;
-            }
+            if (p1 < 5) html += `<div class="p-3 bg-red-50 text-red-800 rounded-lg border border-red-200 mb-2"><strong>❌ ส่วน Python (ได้ ${p1}/10)</strong> ควรทบทวนเรื่อง: ตรรกะการเขียนโปรแกรม, Syntax Error</div>`;
+            else html += `<div class="p-3 bg-green-50 text-green-800 rounded-lg border border-green-200 mb-2"><strong>✅ ส่วน Python (ได้ ${p1}/10)</strong> ทำได้ดีแล้ว! วิเคราะห์โค้ดได้ถูกต้องแม่นยำ</div>`;
+            
+            if (p2 < 5) html += `<div class="p-3 bg-red-50 text-red-800 rounded-lg border border-red-200"><strong>❌ ส่วนข้อมูล (ได้ ${p2}/10)</strong> ควรทบทวนเรื่อง: การวิเคราะห์คุณภาพข้อมูล, ประเภทข้อมูล</div>`;
+            else html += `<div class="p-3 bg-green-50 text-green-800 rounded-lg border border-green-200"><strong>✅ ส่วนข้อมูล (ได้ ${p2}/10)</strong> เยี่ยมมาก! มีทักษะการคิดวิเคราะห์ข้อมูลที่ดี</div>`;
+            
             container.innerHTML = html;
         }
 
@@ -636,44 +917,22 @@
         // --- SURVEY & SUBMISSION ---
         function renderSurvey() {
             const container = document.getElementById('survey-questions');
-            container.innerHTML = `<div class="bg-yellow-50 p-4 rounded-lg mb-4 text-sm text-yellow-800">
-                <p>ตอบตามความจริงได้เลย (5=มากที่สุด ... 1=น้อยที่สุด)</p>
-            </div>`;
-            
+            container.innerHTML = `<div class="bg-yellow-50 p-4 rounded-lg mb-4 text-sm text-yellow-800"><p>ตอบตามความจริงได้เลย (5=มากที่สุด ... 1=น้อยที่สุด)</p></div>`;
             let qIndex = 0;
             surveyStructure.forEach(part => {
                 let html = `<div class="mb-6"><h3 class="font-bold text-indigo-700 mb-3 border-b pb-1">${part.title}</h3>`;
                 part.items.forEach(item => {
                     qIndex++;
-                    html += `<div class="mb-3 bg-gray-50 p-3 rounded-lg">
-                                <p class="text-sm font-medium mb-2">${item}</p>
-                                <div class="flex justify-between max-w-xs mx-auto">
-                                    ${[1,2,3,4,5].map(v => `
-                                        <label class="flex flex-col items-center cursor-pointer">
-                                            <input type="radio" name="sq${qIndex}" value="${v}" class="w-5 h-5 accent-purple-600 mb-1" required>
-                                            <span class="text-xs text-gray-500">${v}</span>
-                                        </label>`).join('')}
-                                </div>
-                             </div>`;
+                    html += `<div class="mb-3 bg-gray-50 p-3 rounded-lg"><p class="text-sm font-medium mb-2">${item}</p><div class="flex justify-between max-w-xs mx-auto">${[1,2,3,4,5].map(v => `<label class="flex flex-col items-center cursor-pointer"><input type="radio" name="sq${qIndex}" value="${v}" class="w-5 h-5 accent-purple-600 mb-1" required><span class="text-xs text-gray-500">${v}</span></label>`).join('')}</div></div>`;
                 });
                 container.innerHTML += html + '</div>';
             });
-            
-            container.innerHTML += `
-                <div class="mt-6 border-t pt-4">
-                    <h3 class="font-bold text-indigo-700 mb-3">💬 ความในใจถึงครู</h3>
-                    <div class="space-y-3">
-                        <textarea id="survey-q1" class="w-full border p-2 rounded" placeholder="1. ส่วนไหนยากที่สุด?" rows="2"></textarea>
-                        <textarea id="survey-q2" class="w-full border p-2 rounded" placeholder="2. ภูมิใจกับงานไหนที่สุด?" rows="2"></textarea>
-                        <textarea id="survey-q3" class="w-full border p-2 rounded" placeholder="3. อยากบอกอะไรเพิ่มไหม?" rows="2"></textarea>
-                    </div>
-                </div>`;
+            container.innerHTML += `<div class="mt-6 border-t pt-4"><h3 class="font-bold text-indigo-700 mb-3">💬 ความในใจถึงครู</h3><div class="space-y-3"><textarea id="survey-q1" class="w-full border p-2 rounded" placeholder="1. ส่วนไหนยากที่สุด?" rows="2"></textarea><textarea id="survey-q2" class="w-full border p-2 rounded" placeholder="2. ภูมิใจกับงานไหนที่สุด?" rows="2"></textarea><textarea id="survey-q3" class="w-full border p-2 rounded" placeholder="3. อยากบอกอะไรเพิ่มไหม?" rows="2"></textarea></div></div>`;
         }
 
         function submitSurvey(e) {
             e.preventDefault();
             let totalRating = 0, count = 10, surveyScores = [], answeredCount = 0;
-            
             for(let i=1; i<=10; i++) {
                 const els = document.getElementsByName(`sq${i}`);
                 let checked = false, val = 0;
@@ -685,13 +944,41 @@
             
             const avg = (totalRating / count).toFixed(2);
             const comments = `1. ${document.getElementById('survey-q1').value} | 2. ${document.getElementById('survey-q2').value} | 3. ${document.getElementById('survey-q3').value}`;
-            
-            // Get final score from element
             const finalScore = document.getElementById('final-score').innerText;
+            
             sendDataToScript(surveyScores, avg, comments, finalScore);
             
             document.getElementById('survey-section').classList.add('hidden');
-            Swal.fire('บันทึกสำเร็จ!', 'ขอบคุณที่ตั้งใจทำข้อสอบครับ', 'success').then(() => location.reload());
+            renderAnswerKey(); // Show Answer Key after survey
+            document.getElementById('answer-key-section').classList.remove('hidden');
+            
+            Swal.fire('บันทึกสำเร็จ!', 'ระบบบันทึกคะแนนและแบบประเมินเรียบร้อยแล้ว', 'success');
+        }
+
+        function renderAnswerKey() {
+            const list = document.getElementById('answer-list');
+            list.innerHTML = questions.map((q, i) => {
+                const userAnsIndex = userAnswers[i];
+                const isCorrect = userAnsIndex === q.ans;
+                const userAnsText = userAnsIndex !== null ? q.options[userAnsIndex] : "ไม่ได้ตอบ";
+                const correctAnsText = q.options[q.ans];
+                
+                let html = `<div class="border-b border-gray-200 pb-4 mb-4">
+                    <p class="font-bold text-gray-800 mb-2">ข้อ ${i+1}: ${q.q}</p>
+                    <div class="flex flex-col gap-1 text-sm">`;
+                    
+                if (isCorrect) {
+                    html += `<p class="text-green-600 font-bold">✅ ตอบถูก: ${userAnsText}</p>`;
+                } else {
+                    html += `<p class="text-red-500 font-bold">❌ ตอบผิด: ${userAnsText}</p>
+                             <p class="text-green-600 font-bold">✅ คำตอบที่ถูก: ${correctAnsText}</p>`;
+                }
+                
+                html += `<p class="text-gray-500 mt-2 bg-gray-50 p-2 rounded">💡 <span class="font-semibold">อธิบาย:</span> ${q.desc}</p>
+                    </div>
+                </div>`;
+                return html;
+            }).join('');
         }
 
         function sendDataToScript(surveyScores, surveyAvg, surveyComment, scoreToSend) {
@@ -717,6 +1004,11 @@
             }
 
             script.src = `${GOOGLE_SCRIPT_URL}?${params.toString()}`;
+            script.onerror = function() {
+                 const statusDiv = document.getElementById('sending-status');
+                 statusDiv.innerHTML = '❌ เชื่อมต่อ Google Sheet ไม่ได้ (Script Load Error)';
+                 statusDiv.className = "p-3 bg-red-50 rounded-lg border border-red-200 mt-4 text-red-700 text-sm";
+            };
             document.body.appendChild(script);
         }
 
@@ -733,22 +1025,38 @@
 
         // --- TEACHER FUNCTIONS (Simplified) ---
         function checkTeacherAccess() {
-            Swal.fire({ title: 'รหัสผ่านครู', input: 'password', showCancelButton: true }).then((res) => {
-                if (res.isConfirmed && res.value === 'passara') {
-                    showPage('teacher');
-                    setTimeout(initTeacherDashboard, 500);
-                } else if(res.isConfirmed) Swal.fire('รหัสผิด', '', 'error');
+            Swal.fire({
+                title: '🔒 รหัสผ่านครู',
+                input: 'password',
+                showCancelButton: true,
+                confirmButtonText: 'เข้าสู่ระบบ',
+                showLoaderOnConfirm: true,
+                preConfirm: (pass) => {
+                    return new Promise((resolve) => {
+                        tempPassword = pass;
+                        resolve();
+                    });
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetchScoreboard(tempPassword);
+                }
             });
         }
         
-        function fetchScoreboard() {
+        function fetchScoreboard(password) {
             const script = document.createElement('script');
-            script.src = `${GOOGLE_SCRIPT_URL}?action=read&callback=receiveScores`;
+            script.src = `${GOOGLE_SCRIPT_URL}?action=read&password=${password}&callback=receiveScores`;
             document.body.appendChild(script);
         }
 
         window.receiveScores = function(data) {
+            if (data.result === 'error') {
+                Swal.fire('รหัสผ่านผิด!', 'กรุณาลองใหม่อีกครั้ง', 'error');
+                return;
+            }
             if(!Array.isArray(data)) return Swal.fire('Error', 'รูปแบบข้อมูลผิดพลาด', 'error');
+            
             allSheetData = data;
             const tbody = document.getElementById('teacher-scoreboard-body');
             tbody.innerHTML = '';
@@ -756,14 +1064,13 @@
                 let dateStr = row.timestamp ? new Date(row.timestamp).toLocaleDateString('th-TH') : '-';
                 tbody.innerHTML += `<tr class="border-b"><td class="p-2">${dateStr}</td><td class="p-2">${row.name}</td><td class="p-2">${row.room}</td><td class="p-2 text-center">${row.score}</td><td class="p-2 text-center">${row.surveyAvg || '-'}</td></tr>`;
             });
+            
+            showPage('teacher');
             updateTeacherStats();
         };
 
         function initTeacherDashboard() {
-            const sel = document.getElementById('filter-room');
-            sel.innerHTML = '<option value="all">ทุกห้องเรียน</option>';
-            for(let i=101; i<=113; i++) sel.innerHTML += `<option value="${i}">ม.1/${i-100}</option>`;
-            fetchScoreboard();
+            // Already handled in receiveScores
         }
 
         function updateTeacherStats() {
@@ -771,13 +1078,11 @@
             let data = allSheetData;
             if(room !== 'all') data = data.filter(d => d.room == room);
 
-            // Basic Stats Logic (Same as before)
             const pre = data.filter(d => d.type === 'Pre-test').map(d => Number(d.score));
             const post = data.filter(d => d.type === 'Post-test').map(d => Number(d.score));
             const avgPre = pre.length ? (pre.reduce((a,b)=>a+b,0)/pre.length).toFixed(2) : "0.00";
             const avgPost = post.length ? (post.reduce((a,b)=>a+b,0)/post.length).toFixed(2) : "0.00";
             
-            // Satisfaction Logic
             let qStats = Array(10).fill(null).map(()=>({1:0,2:0,3:0,4:0,5:0})), countSat = 0, sumSat = 0;
             data.forEach(d => {
                 if(d.surveyAvg && d.s1) {
@@ -787,7 +1092,6 @@
             });
             const avgSat = countSat ? (sumSat/countSat).toFixed(2) : "0.00";
             
-            // Calculate Description Logic (Added this block)
             let satDesc = "ยังไม่มีข้อมูล";
             if(countSat > 0) {
                 if(avgSat >= 4.50) satDesc = "มากที่สุด (Excellent)";
@@ -797,14 +1101,11 @@
                 else satDesc = "น้อยที่สุด (Very Poor)";
             }
 
-            // Update UI
             document.getElementById('stat-count').innerText = data.length;
             document.getElementById('stat-avg-pre').innerText = avgPre;
             document.getElementById('stat-avg-post').innerText = avgPost;
             document.getElementById('stat-development').innerText = (avgPost-avgPre).toFixed(2);
             document.getElementById('stat-satisfaction').innerText = avgSat;
-            
-            // Check if element exists before setting innerText to avoid error
             const satDescElem = document.getElementById('stat-satisfaction-desc');
             if(satDescElem) satDescElem.innerText = satDesc;
 
@@ -813,7 +1114,6 @@
         }
 
         function renderCharts(pre, post, postScores) {
-            // Simplified chart rendering reuse existing logic
             const ctx1 = document.getElementById('chart-comparison').getContext('2d');
             if(window.chartComp) window.chartComp.destroy();
             window.chartComp = new Chart(ctx1, { type: 'bar', data: { labels: ['ก่อน', 'หลัง'], datasets: [{ label: 'คะแนน', data: [pre, post], backgroundColor: ['#93C5FD', '#34D399'] }] } });
@@ -829,7 +1129,6 @@
             container.innerHTML = total === 0 ? '<p class="text-center text-gray-400 col-span-2">ยังไม่มีข้อมูล</p>' : '';
             if(total === 0) return;
             
-            // Render only if data exists (Simplified for brevity)
             if(window.satCharts) window.satCharts.forEach(c => c.destroy());
             window.satCharts = [];
             
@@ -848,32 +1147,25 @@
         }
 
         function generateResearchReport() {
-             // Retrieve values
              const count = document.getElementById('stat-count').innerText;
              const pre = document.getElementById('stat-avg-pre').innerText;
              const post = document.getElementById('stat-avg-post').innerText;
              const dev = document.getElementById('stat-development').innerText;
              const sat = document.getElementById('stat-satisfaction').innerText;
-             
-             // Safely retrieve description
              const satDescElem = document.getElementById('stat-satisfaction-desc');
              const satDesc = satDescElem ? satDescElem.innerText : "-";
-             
              const room = document.getElementById('filter-room').value;
              const roomText = room === 'all' ? 'ทุกห้องเรียน' : `ม.1/${room-100}`;
 
-             // Inject to report
              document.getElementById('rep-target').innerText = `นักเรียนชั้นมัธยมศึกษาปีที่ 1 (${roomText}) จำนวน ${count} คน`;
              document.getElementById('rep-n').innerText = count;
              document.getElementById('rep-pre-val').innerText = pre;
              document.getElementById('rep-post-val').innerText = post;
              document.getElementById('rep-dev-val').innerText = (dev > 0 ? '+' : '') + dev;
              document.getElementById('rep-sat-val').innerText = sat + " (" + satDesc + ")";
-             
              document.getElementById('rep-discuss-dev').innerText = (dev > 0 ? '+' : '') + dev;
              document.getElementById('rep-discuss-sat').innerText = satDesc;
 
-             // Show report
              document.getElementById('research-report').classList.remove('hidden');
         }
     </script>
